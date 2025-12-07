@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Table(name = "usuarios")
 public class Usuario {
 
     @Id
@@ -19,6 +19,12 @@ public class Usuario {
 
     @Column
     private String nombre;
+
+    @Column
+    private String email;
+
+    @Column
+    private String password;
 
     @Enumerated(EnumType.STRING)
     @Column
