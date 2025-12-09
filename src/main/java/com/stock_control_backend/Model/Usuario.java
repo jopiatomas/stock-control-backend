@@ -3,6 +3,7 @@ package com.stock_control_backend.Model;
 import com.stock_control_backend.Model.Enum.Rol;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "usuarios")
 public class Usuario {
 
@@ -18,7 +20,7 @@ public class Usuario {
     private Long id;
 
     @Column
-    private String nombre;
+    private String username;
 
     @Column
     private String email;

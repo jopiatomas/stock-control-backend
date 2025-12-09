@@ -5,5 +5,6 @@ import com.stock_control_backend.Model.Enum.Rol;
 public record UsuarioDetailDTO (
         Long id,
         String username,
+        String email,
         Rol rol
 ) {}
