@@ -21,12 +21,6 @@ public class Producto {
     private String nombre;
 
     @Column
-    private String apellido;
-
-    @Column(nullable = false)
-    private String password;
-
-    @Column
     private String categoria;
 
     @Column
@@ -45,5 +39,6 @@ public class Producto {
     @Column
     private EstadoProducto estado;
 
+    // un producto puede tener varios proveedores, one to many
 
 }

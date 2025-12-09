@@ -31,4 +31,6 @@ public class Proveedor {
     @Column
     private String rubro;
 
+    // lista de productos, un proveedor tiene varios productos
+    // el producto que vende este proveedor, tiene menos atributos (no tiene stockMinimo, por ejemplo)
 }
