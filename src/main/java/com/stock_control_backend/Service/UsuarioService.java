@@ -3,6 +3,8 @@ package com.stock_control_backend.Service;
 import com.stock_control_backend.DTO.UsuarioDTO.UsuarioDetailDTO;
 import com.stock_control_backend.DTO.UsuarioDTO.UsuarioListDTO;
 import com.stock_control_backend.DTO.UsuarioDTO.UsuarioRequestDTO;
+import com.stock_control_backend.Exception.EmailAlreadyExistsException;
+import com.stock_control_backend.Mapper.UsuarioMapper;
 import com.stock_control_backend.Model.Usuario;
 import com.stock_control_backend.Repository.IUsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,25 +26,21 @@ public class UsuarioService {
         if(usuarioRepository.existsByUsername(requestDTO.username())){
             throw new RuntimeException("El usuario ya existe.");
         }
+        if (usuarioRepository.findByEmail(requestDTO.email()).isPresent()) {
+            throw new EmailAlreadyExistsException(requestDTO.email());
+        }
 
-        Usuario usuario = Usuario.builder()
-                .username(requestDTO.username())
-                .email(requestDTO.email())
-                .password(requestDTO.password())
-                .rol(requestDTO.rol())
-                .build();
+        Usuario usuario = UsuarioMapper.toEntity(requestDTO);
+        Usuario guardado = usuarioRepository.save(usuario);
 
-
-        usuarioRepository.save(usuario);
-
-        return toDetail(usuario);
+        return UsuarioMapper.toDetail(guardado);
 
     }
 
     public List<UsuarioListDTO> listar(){
         return usuarioRepository.findAll()
                 .stream()
-                .map(this::toList)
+                .map(UsuarioMapper::toList)
                 .toList();
     }
 
@@ -56,7 +54,7 @@ public class UsuarioService {
 
         Usuario usuarioActualizado = usuarioRepository.save(usuario);
 
-        return toDetail(usuarioActualizado);
+        return UsuarioMapper.toDetail(usuarioActualizado);
     }
 
     public void eliminarUsuario(Long id){
@@ -70,25 +68,7 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        return toDetail(usuario);
+        return UsuarioMapper.toDetail(usuario);
     }
 
-
-    private UsuarioListDTO toList(Usuario usuario) {
-        return new UsuarioListDTO(
-                usuario.getId(),
-                usuario.getUsername(),
-                usuario.getEmail(),
-                usuario.getRol()
-        );
-    }
-
-    private UsuarioDetailDTO toDetail(Usuario usuario) {
-        return new UsuarioDetailDTO(
-                usuario.getId(),
-                usuario.getUsername(),
-                usuario.getEmail(),
-                usuario.getRol()
-        );
-    }
 }

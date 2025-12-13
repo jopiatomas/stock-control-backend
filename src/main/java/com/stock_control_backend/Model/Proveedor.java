@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -33,4 +35,7 @@ public class Proveedor {
 
     // lista de productos, un proveedor tiene varios productos
     // el producto que vende este proveedor, tiene menos atributos (no tiene stockMinimo, por ejemplo)
+    @ManyToMany(mappedBy = "proveedores")
+    private List<Producto> productos;
+
 }

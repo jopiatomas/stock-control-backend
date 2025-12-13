@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -40,5 +42,13 @@ public class Producto {
     private EstadoProducto estado;
 
     // un producto puede tener varios proveedores, one to many
+    @ManyToMany
+    @JoinTable(
+            name = "producto_proveedor",
+            joinColumns = @JoinColumn(name = "producto_id"),
+            inverseJoinColumns = @JoinColumn(name = "proveedor_id")
+    )
+    private List<Proveedor> proveedores;
+
 
 }
