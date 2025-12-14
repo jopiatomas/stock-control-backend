@@ -20,7 +20,7 @@ public class UsuarioService {
     @Autowired
     private IUsuarioRepository usuarioRepository;
 
-    public UsuarioDetailDTO crear(UsuarioRequestDTO requestDTO){
+    public UsuarioDetailDTO crearUsuario(UsuarioRequestDTO requestDTO){
 
         // verificar que no exista por username
         if(usuarioRepository.existsByUsername(requestDTO.username())){
@@ -51,6 +51,7 @@ public class UsuarioService {
         usuario.setUsername(requestDTO.username());
         usuario.setEmail(requestDTO.email());
         usuario.setPassword(requestDTO.password());
+        usuario.setRol(requestDTO.rol());
 
         Usuario usuarioActualizado = usuarioRepository.save(usuario);
 
