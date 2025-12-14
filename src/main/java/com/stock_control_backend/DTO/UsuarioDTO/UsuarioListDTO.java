@@ -6,5 +6,5 @@ public record UsuarioListDTO (
         Long id,
         String username,
         String email,
-        Rol rol)
-{}
+        Rol rol
+){}

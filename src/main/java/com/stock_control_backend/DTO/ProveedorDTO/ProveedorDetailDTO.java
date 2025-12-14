@@ -1,4 +1,12 @@
 package com.stock_control_backend.DTO.ProveedorDTO;
 
-public class ProveedorDetailDTO {
-}
+
+public record ProveedorDetailDTO (
+        Long id,
+        String nombre,
+        String telefono,
+        String email,
+        String direccion,
+        String rubro
+)
+{}

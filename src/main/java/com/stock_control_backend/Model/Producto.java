@@ -3,6 +3,7 @@ package com.stock_control_backend.Model;
 import com.stock_control_backend.Model.Enum.EstadoProducto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "productos")
+@Builder
 public class Producto {
 
     @Id
