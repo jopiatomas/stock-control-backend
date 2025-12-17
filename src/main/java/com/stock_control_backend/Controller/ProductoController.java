@@ -1,6 +1,7 @@
 package com.stock_control_backend.Controller;
 
 
+import com.stock_control_backend.DTO.ProductoDTO.ProductoConProveedoresDTO;
 import com.stock_control_backend.DTO.ProductoDTO.ProductoDetailDTO;
 import com.stock_control_backend.DTO.ProductoDTO.ProductoListDTO;
 import com.stock_control_backend.DTO.ProductoDTO.ProductoRequestDTO;
@@ -47,6 +48,11 @@ public class ProductoController {
     public ResponseEntity<Void> eliminarProducto(@PathVariable Long id){
         productoService.eliminarProducto(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/proveedores")
+    public ProductoConProveedoresDTO obtenerConProveedores(@PathVariable Long id) {
+        return productoService.obtenerConProveedores(id);
     }
 
 
